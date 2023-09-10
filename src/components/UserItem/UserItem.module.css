@@ -1,0 +1,17 @@
+.user{
+    padding: 20px;
+}
+
+.user-inner{
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+}
+.avatar{
+
+}
+
+.info{
+    display: flex;
+    flex-direction: column;
+}

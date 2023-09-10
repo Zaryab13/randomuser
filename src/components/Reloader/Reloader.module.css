@@ -1,0 +1,27 @@
+.reloader{
+    height: 10%;
+    display: block;
+    text-align: right;
+    padding: 10px 30px 10px 10px;
+}
+.reloader svg{
+    width: 50px;
+    height: 50px;
+}
+.spin{
+    animation: spin 300ms linear infinite;
+}
+.reloader img{
+    width: 60px;
+}
+
+
+
+@keyframes spin{
+    from {
+        transform: rotate(0deg);
+    }
+    to{
+        transform: rotate(360deg);
+    }
+}
