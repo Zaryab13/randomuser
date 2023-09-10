@@ -1,0 +1,12 @@
+.usersList{
+    display: grid;
+    grid-template-columns: 1fr 1fr ;
+    gap: 10px;
+}
+
+
+@media screen and (max-width: 855px){
+    .usersList{
+        grid-template-columns: 1fr;
+    }
+}

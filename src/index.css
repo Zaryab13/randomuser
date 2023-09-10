@@ -8,19 +8,12 @@ ul{
   list-style: none;
 }
 
-.main-container{
-  background-color: black;
-  height: 100vh;
-  width: 100vw;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
 .app-container{
   padding: 10px;
+  margin: 0 auto;
   background-color: #fff;
   width: 80%;
   height: 70%;
 }
+
 

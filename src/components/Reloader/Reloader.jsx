@@ -2,12 +2,13 @@ import Card from "../UI/Card";
 import SyncArrow from '../Svg/sync-arrow';
 import styles from "./Reloader.module.css";
 
-const Reloader = () => {
+const Reloader = ({onClick}) => {
+  
   return (
   <Card className={styles.reloader}>
-    {/* When the user are yet to loaded */}
-    {/* className={()? styles.spin: } */}
-      <SyncArrow />
+    <button className={styles.btn} onClick={onClick}>
+      <SyncArrow/>
+    </button>
   </Card>
   );
 };

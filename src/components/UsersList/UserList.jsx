@@ -1,37 +1,47 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 
-import UserItem from '../UserItem/UserItem';
+import UserItem from "../UserItem/UserItem";
+import styles from "./UserList.module.css";
 
 // Axios Instance for Base URL
 const client = axios.create({
-  baseURL: "https://random-data-api.com/api/v2/users",
+  baseURL: "https://randomuser.me/api/",
 });
 
-const UserList = () => {
+const UserList = (props) => {
   const [randomUsers, setRandomUsers] = useState([]);
+  const [apiCall, setApiCall] = useState(false);
 
   useEffect(() => {
     const getUsers = async () => {
-      const resp = await client.get("?size=5&is_xml=true");
-      const data = resp.data;
-      setRandomUsers(data);
+      try {
+        const resp = await client.get("?results=10");
+        const data = resp.data.results;
+        setRandomUsers(data);
+      } catch (error) {
+        console.error('APi Call Failed' + error);
+      }
     };
+    setApiCall(true);
     getUsers();
-    // console.log(randomUsers)
-  }, []);
+    props.onRequest(apiCall);
+    setApiCall(false);
+  },[]);
 
   return (
-    <ul>
+    <ul className={styles.usersList}>
+      {randomUsers.length === 0 && (
+        <h3 className="error_text">Connection Timeout</h3>
+      )}
       {randomUsers.length > 0 &&
         randomUsers.map((user) => (
           <UserItem
-            key={user.uid}
-            fname={user.first_name}
-            lname={user.last_name}
+            key={user.login.uuid}
+            name={user.name}
             email={user.email}
-            image={user.avatar}
-            phNo={user.phone_number}
+            image={user.picture.large}
+            cell={user.cell}
           />
         ))}
     </ul>
