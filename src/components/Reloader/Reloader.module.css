@@ -21,20 +21,6 @@
     width: 50px;
     height: 50px;
 }
-.spin{
-    animation: spin 300ms linear infinite;
-}
 .reloader img{
     width: 60px;
-}
-
-
-
-@keyframes spin{
-    from {
-        transform: rotate(0deg);
-    }
-    to{
-        transform: rotate(360deg);
-    }
 }

@@ -7,7 +7,7 @@ function App() {
   const [reloadCount, setReloadCount] = useState(0);
 
   const apiCallHandler = (state) => {
-    console.log(state);
+    // console.log(state);
   };
 
   const reloadHandler = () => {
@@ -17,10 +17,10 @@ function App() {
   return (
     <section>
       <Card className="app-container">
-        <Reloader onClick={reloadHandler} />
         <UserList
           key={reloadCount}
           onRequest={apiCallHandler}
+          onReload={reloadHandler}
         />
       </Card>
     </section>

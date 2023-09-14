@@ -4,6 +4,18 @@
     gap: 10px;
 }
 
+.spin{
+    animation: spin 300ms linear infinite;
+}
+
+@keyframes spin{
+    from {
+        transform: rotate(0deg);
+    }
+    to{
+        transform: rotate(360deg);
+    }
+}
 
 @media screen and (max-width: 855px){
     .usersList{

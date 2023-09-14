@@ -1,51 +1,40 @@
-import { useEffect, useState } from "react";
-import axios from "axios";
+import { useState,Fragment } from "react";
 
 import UserItem from "../UserItem/UserItem";
 import styles from "./UserList.module.css";
+import Reloader from "../Reloader/Reloader";
+import useAPI from '../../Hooks/useAPI';
 
-// Axios Instance for Base URL
-const client = axios.create({
-  baseURL: "https://randomuser.me/api/",
-});
+const UserList = () => {
 
-const UserList = (props) => {
-  const [randomUsers, setRandomUsers] = useState([]);
-  const [apiCall, setApiCall] = useState(false);
+  // const [randomUsers, setRandomUsers] = useState([]);
 
-  useEffect(() => {
-    const getUsers = async () => {
-      try {
-        const resp = await client.get("?results=10");
-        const data = resp.data.results;
-        setRandomUsers(data);
-      } catch (error) {
-        console.error('APi Call Failed' + error);
-      }
-    };
-    setApiCall(true);
-    getUsers();
-    props.onRequest(apiCall);
-    setApiCall(false);
-  },[]);
+  const [data, isLoading, error] = useAPI("https://randomuser.me/api/?results=10")
 
+  const handleReload = async () => {
+    setRandomUsers(data);
+  }
+  
   return (
-    <ul className={styles.usersList}>
-      {randomUsers.length === 0 && (
-        <h3 className="error_text">Connection Timeout</h3>
-      )}
-      {randomUsers.length > 0 &&
-        randomUsers.map((user) => (
-          <UserItem
-            key={user.login.uuid}
-            name={user.name}
-            email={user.email}
-            image={user.picture.large}
-            cell={user.cell}
-          />
-        ))}
-    </ul>
-  );
+    <Fragment>
+      <Reloader onClick={handleReload} className={(isLoading)? styles.spin:''}/>
+      <ul className={styles.usersList}>
+        {error && (
+          <h3 className="error_text">Connection Timeout</h3>
+        )}
+        {data.length > 0 &&
+          data.map((user) => (
+            <UserItem
+              key={user.login.uuid}
+              name={user.name}
+              email={user.email}
+              image={user.picture.large}
+              cell={user.cell}
+            />
+          ))}
+      </ul>
+    </Fragment>
+  )
 };
 
 export default UserList;
