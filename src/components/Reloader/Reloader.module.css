@@ -24,3 +24,23 @@
 .reloader img{
     width: 60px;
 }
+
+
+.spin{
+    animation: spin 500ms linear infinite;
+}
+
+@keyframes spin{
+    from {
+        transform: rotate(0deg);
+    }
+    to{
+        transform: rotate(360deg);
+    }
+}
+
+@media screen and (max-width: 855px){
+    .usersList{
+        grid-template-columns: 1fr;
+    }
+}
