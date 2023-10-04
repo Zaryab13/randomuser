@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
+
 export const useAPI = (url) => {
   const [response, setResponse] = useState("");
   const [isLoading, setIsLoading] = useState(true);
