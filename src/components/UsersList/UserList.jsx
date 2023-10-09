@@ -11,23 +11,23 @@ const UserList = () => {
   // const [data, isLoading, error] = useAPI("https://randomuser.me/api/?results=10")
 
   const ReloadHandler = async () => {
-    setIsLoading(true)
+    setIsLoading(true);
 
     const response = await fetch("https://randomuser.me/api/?results=10");
     const data = await response.json();
     setRandomUsers(data.results);
 
     setIsLoading(false);
-  }
+  };
 
-  useEffect(()=>{
+  useEffect(() => {
     ReloadHandler();
-  },[])
-  
+  }, []);
+
   // className={(isLoading)? styles.spin:''}
   return (
     <Fragment>
-      <Reloader onClick={ReloadHandler} onLoading={isLoading}/>
+      <Reloader onClick={ReloadHandler} onLoading={isLoading} />
       <ul className={styles.usersList}>
         {!isLoading && randomUsers.length === 0 && (
           <h3 className="error_text">Connection Timeout</h3>
@@ -44,7 +44,7 @@ const UserList = () => {
           ))}
       </ul>
     </Fragment>
-  )
+  );
 };
 
 export default UserList;
